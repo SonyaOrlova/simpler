@@ -28,10 +28,16 @@ module Simpler
 
     def call(env)
       route = @router.route_for(env)
+      return not_found unless route
+
       controller = route.controller.new(env)
       action = route.action
 
       make_response(controller, action)
+    end
+
+    def not_found
+      Rack::Response.new('Not found', 404).finish
     end
 
     private
