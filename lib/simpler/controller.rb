@@ -32,6 +32,10 @@ module Simpler
       @response['Content-Type'] = 'text/html'
     end
 
+    def status(status)
+      @response.status = status
+    end
+
     def write_response
       body = @body || render_body
 
