@@ -33,7 +33,7 @@ module Simpler
     end
 
     def write_response
-      body = render_body
+      body = @body || render_body
 
       @response.write(body)
     end
@@ -46,9 +46,17 @@ module Simpler
       @request.params
     end
 
-    def render(template)
+    def render(options)
+      (options.is_a? String) ? render_html(options) : render_plain(options[:plain])
+    end
+
+    def render_html(template)
       @request.env['simpler.template'] = template
     end
 
+    def render_plain(string)
+      @body = string
+    end
+    
   end
 end
