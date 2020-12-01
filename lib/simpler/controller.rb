@@ -29,11 +29,15 @@ module Simpler
     end
 
     def set_default_headers
-      @response['Content-Type'] = 'text/html'
+      headers({ 'Content-Type' => 'text/html' })
     end
 
     def status(status)
       @response.status = status
+    end
+
+    def headers(headers={})
+      headers.each { |key, value| @response[key] = value }
     end
 
     def write_response
