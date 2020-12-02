@@ -6,11 +6,14 @@ class TestsController < Simpler::Controller
     status 201
     headers({ 'Content-Type' => 'text/plain' })
 
-    render plain: "Plain text response"
+    render plain: 'Plain text response Index method'
   end
 
-  def create
+  def show
+    status 200
+    headers({ 'Content-Type' => 'text/plain' })
 
+    render plain: "Plain text response Show method. Params = #{params}"
   end
 
 end
